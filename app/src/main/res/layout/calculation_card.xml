@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="4dp"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txtCalculationTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="28dp"
+            android:background="@color/bkg_card"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:paddingBottom="-2dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/txtHiddenID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"/>
+
+        <LinearLayout
+            android:id="@+id/horizLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/txtCalculationTitle">
+            <LinearLayout
+                android:id="@+id/layoutTextObjects"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="5dp"
+                android:paddingBottom="6dp"
+                android:layout_marginEnd="10dp">
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/txtCalculatedInterval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="5dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/txtExclusions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
