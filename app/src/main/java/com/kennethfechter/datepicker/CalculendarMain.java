@@ -262,11 +262,13 @@ public class CalculendarMain extends AppCompatActivity
             currentArchiveState = false;
             fab.setVisibility(View.VISIBLE);
             fab.startAnimation(floatingActionButtonGrow);
+            setTitle("Current Calculations");
         } else if (id == R.id.nav_calc_archive) {
             UpdateListView(true);
             currentArchiveState = true;
             fab.startAnimation(floatingActionButtonShrink);
             fab.setVisibility(View.INVISIBLE);
+            setTitle("Archived Calculations");
         } else if (id == R.id.nav_manage) {
             Intent intent = new Intent(this, CalculendarSettings.class);
             startActivity(intent);
