@@ -173,6 +173,8 @@ public class CalculendarMain extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
 
+        setTitle("Current Calculations");
+
         floatingActionButtonGrow = AnimationUtils.loadAnimation(this, R.anim.animation_fab_grow);
         floatingActionButtonShrink = AnimationUtils.loadAnimation(this, R.anim.animation_fab_shrink);
 
