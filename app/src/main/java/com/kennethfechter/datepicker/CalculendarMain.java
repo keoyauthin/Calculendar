@@ -187,12 +187,12 @@ public class CalculendarMain extends AppCompatActivity
         displayNameText = (TextView) headerLayout.findViewById(R.id.displayNameText);
         personalizationText = (TextView) headerLayout.findViewById(R.id.personalizationText);
         UpdateTextFromPreferences();
-        if(prefService.getBooleanPreference("auto_archive_items",false)){
-            DatabaseService.ArchiveAndScrub(prefService);
-        }
+
         currentArchiveState = false;
         fab.setVisibility(View.VISIBLE);
         fab.startAnimation(floatingActionButtonGrow);
+
+        DatabaseService.ArchiveAndScrub(prefService);
     }
 
     private void UpdateTextFromPreferences() {

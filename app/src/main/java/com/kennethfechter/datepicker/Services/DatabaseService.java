@@ -29,9 +29,12 @@ public class DatabaseService {
         return Calculation.findById(Calculation.class, itemId);
     }
 
-    public static void ArchiveAndScrub(PreferencesService prefService){
-        Archive(prefService);
-        ScrubArchives(prefService);
+    public static void ArchiveAndScrub(PreferencesService prefService) {
+        if (prefService.getBooleanPreference("auto_archive_items", false)) {
+            Archive(prefService);
+            ScrubArchives(prefService);
+        }
+
     }
 
     public static void Archive(PreferencesService prefService){
