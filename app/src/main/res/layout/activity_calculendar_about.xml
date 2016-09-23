@@ -12,14 +12,30 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/app_version_text"
-            android:layout_marginTop="10dp"
+        android:id="@+id/app_version_text"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/dev_header"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textStyle="bold"
+            android:text="Developers"
             android:textColor="@android:color/black"
             android:textSize="24sp"/>
+            <ListView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/devsList" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
