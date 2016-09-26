@@ -99,10 +99,16 @@
     <!-- Example settings for Notifications -->
     <string name="pref_header_notifications">Notifications</string>
 
-    <string name="pref_title_new_message_notifications">New message notifications</string>
+    <string name="pref_title_new_message_notifications">Enable FireBase Push Notifications (In App Only)</string>
 
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="validation_error_start_date_must_occur_before_end_date">Validation Error: start date must occur before end date</string>
+    <string name="sundays">Sundays</string>
+    <string name="add_custom_date">Add Custom Date</string>
+    <string name="custom_days">Custom Days</string>
+    <string name="exclusion_options">Exclusion Options</string>
+    <string name="saturdays">Saturdays</string>
 </resources>

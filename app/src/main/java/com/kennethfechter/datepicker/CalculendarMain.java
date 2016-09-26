@@ -24,9 +24,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -348,6 +350,7 @@ public class CalculendarMain extends AppCompatActivity
         final CheckBox chkSaturdays = (CheckBox) dialogLayout.findViewById(R.id.chkSaturdays);
         final CheckBox chkSundays = (CheckBox) dialogLayout.findViewById(R.id.chkSundays);
         final Button buttonAddCustomDate = (Button) dialogLayout.findViewById(R.id.btnAddCustomDay);
+        final ListView customDatesListView = (ListView) dialogLayout.findViewById(R.id.customDatesList);
         buttonAddCustomDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -360,8 +363,15 @@ public class CalculendarMain extends AppCompatActivity
                                 selectedCustomDate.set(year,monthOfYear,dayOfMonth);
                                 if(CalculationService.isCustomDateBetweenStartandEnd(startDate,endDate,selectedCustomDate)){
                                     String selectedDay = CalculationService.dateStringConverter(selectedCustomDate);
-                                    customDates.add(selectedDay);
-                                    Toast.makeText(getApplicationContext(), "Custom Date: " + selectedDay + " Added" , Toast.LENGTH_LONG).show();
+                                    if(!customDates.contains(selectedDay))
+                                    {
+                                        customDates.add(selectedDay);
+                                        Toast.makeText(getApplicationContext(), "Custom Date: " + selectedDay + " Added" , Toast.LENGTH_LONG).show();
+                                        customDatesListView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, customDates));
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Custom Date is already in exclusion list" , Toast.LENGTH_LONG).show();
+
+                                    }
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Custom date must be between start and end dates" , Toast.LENGTH_LONG).show();
                                 }
