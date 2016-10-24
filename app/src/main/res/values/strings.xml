@@ -111,4 +111,9 @@
     <string name="custom_days">Custom Days</string>
     <string name="exclusion_options">Exclusion Options</string>
     <string name="saturdays">Saturdays</string>
+    <string name="create_shortcut_short_label">Create</string>
+    <string name="create_shortcut_long_label">Create calculation</string>
+    <string name="archive_shortcut_short_label">Archives</string>
+    <string name="archive_shortcut_long_label">View Archives</string>
+    <string name="shortcut_disabled_message">This shortcut is disabled</string>
 </resources>
