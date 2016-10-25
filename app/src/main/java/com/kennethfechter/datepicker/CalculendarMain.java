@@ -506,6 +506,9 @@ public class CalculendarMain extends AppCompatActivity
         // do things with the view, get data, learn about its life
         View dialogLayoutView = getLayoutInflater().inflate(R.layout.item_info_dialog, null);
 
+        // Get the selected calculations options
+        Options selectedOptions = selectedCalculation.GetOptions();
+
         // Set up the dialogs layout view before we use it.
         ListView customDatesList = (ListView) dialogLayoutView.findViewById(R.id.customDatesList);
         CheckBox chkSundays = (CheckBox)dialogLayoutView.findViewById(R.id.chkSundays);
@@ -513,6 +516,32 @@ public class CalculendarMain extends AppCompatActivity
         CheckBox chkCustomDays = (CheckBox)dialogLayoutView.findViewById(R.id.chkCustomDays);
         Button btnCustomDays = (Button)dialogLayoutView.findViewById(R.id.btnAddCustomDay);
 
+        TextView startDate = (TextView)dialogLayoutView.findViewById(R.id.txtStartDate);
+        TextView endDate = (TextView)dialogLayoutView.findViewById(R.id.txtEndDate);
+
+        startDate.setText(String.format("Start Date: %s", selectedCalculation.GetStartDate()));
+        endDate.setText(String.format("End Date: %s", selectedCalculation.GetEndDate()));
+
+        chkSundays.setChecked(selectedOptions.GetExcludeSundays());
+        chkSundays.setEnabled(!selectedCalculation.itemArchived);
+
+        chkSaturdays.setChecked(selectedOptions.GetExcludeSaturdays());
+        chkSaturdays.setEnabled(!selectedCalculation.itemArchived);
+
+        chkCustomDays.setChecked(selectedOptions.GetExcludeCustomDays());
+        chkCustomDays.setEnabled(!selectedCalculation.itemArchived);
+
+        boolean customDatesButtonVisible = selectedOptions.GetExcludeCustomDays() && !selectedCalculation.itemArchived;
+
+        if(customDatesButtonVisible)
+        {
+            btnCustomDays.setVisibility(View.VISIBLE);
+        }
+
+        if(selectedOptions.GetExcludeCustomDays())
+        {
+            customDatesList.setVisibility(View.VISIBLE);
+        }
 
         new AlertDialog.Builder(CalculendarMain.this)
                 .setView(dialogLayoutView)
