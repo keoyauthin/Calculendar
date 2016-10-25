@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shortcuts xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
-   <!-- <shortcut
+  <shortcut
         android:shortcutId="create"
         android:enabled="true"
         android:icon="@drawable/ic_shortcut_create"
@@ -16,7 +16,6 @@
             <extra android:name="targetAction" android:value="create" />
         </intent>
     </shortcut>
-
     <shortcut
         android:shortcutId="archive"
         android:enabled="true"
@@ -31,5 +30,5 @@
             android:targetClass="com.kennethfechter.datepicker.CalculendarMain">
             <extra android:name="targetAction" android:value="viewArchive" />
         </intent>
-    </shortcut> -->
+    </shortcut>
 </shortcuts>
