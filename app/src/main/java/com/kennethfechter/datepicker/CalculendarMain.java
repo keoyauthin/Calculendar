@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import android.view.GestureDetector.SimpleOnGestureListener;
 
+import com.kennethfechter.datepicker.DataLayer.Calculation;
 import com.kennethfechter.datepicker.DataLayer.CalculationListAdapter;
 import com.kennethfechter.datepicker.DataLayer.Options;
 import com.kennethfechter.datepicker.Services.CalculationService;
@@ -440,7 +441,7 @@ public class CalculendarMain extends AppCompatActivity
                 );
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 dpd.dismissOnPause(true);
-                dpd.setTitle("Choose End Date");
+                dpd.setTitle("Choose Custom Date");
             }
         });
         chkCustomDates.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -472,7 +473,7 @@ public class CalculendarMain extends AppCompatActivity
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if(areDatesValid){
-                        Options options =  new Options(chkSaturdays.isChecked(),chkSundays.isChecked(),chkCustomDates.isChecked(),0);
+                        Options options =  new Options(chkSaturdays.isChecked(),chkSundays.isChecked(),chkCustomDates.isChecked(),customDates);
                         cla.AddInternalItem(CalculationService.calculateInterval(startDate,endDate,options).save(),cla.getItemCount());
                     }
                 }
@@ -492,7 +493,37 @@ public class CalculendarMain extends AppCompatActivity
             myToggleSelection(idx);
             return;
         }
-        // show info dialog for item
+
+        Calculation selectedCalculation = cla.getCalculationAtPosition(idx);
+        if(!selectedCalculation.itemArchived)
+        {
+            showInfoDialog(selectedCalculation);
+        }
+    }
+
+    private void showInfoDialog(Calculation selectedCalculation)
+    {
+        // do things with the view, get data, learn about its life
+        View dialogLayoutView = getLayoutInflater().inflate(R.layout.item_info_dialog, null);
+
+        // Set up the dialogs layout view before we use it.
+        ListView customDatesList = (ListView) dialogLayoutView.findViewById(R.id.customDatesList);
+        CheckBox chkSundays = (CheckBox)dialogLayoutView.findViewById(R.id.chkSundays);
+        CheckBox chkSaturdays = (CheckBox)dialogLayoutView.findViewById(R.id.chkSaturdays);
+        CheckBox chkCustomDays = (CheckBox)dialogLayoutView.findViewById(R.id.chkCustomDays);
+        Button btnCustomDays = (Button)dialogLayoutView.findViewById(R.id.btnAddCustomDay);
+
+
+        new AlertDialog.Builder(CalculendarMain.this)
+                .setView(dialogLayoutView)
+                .setTitle("Calculation Info")
+                .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).show();
+
     }
 
     private class RecyclerViewOnGestureListener extends SimpleOnGestureListener {

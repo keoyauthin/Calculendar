@@ -7,8 +7,8 @@ android {
         applicationId "com.kennethfechter.datepicker"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 32
-        versionName "3.0 UI Beta 1"
+        versionCode 35
+        versionName "3.0 UI Beta 3"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -31,7 +31,7 @@ dependencies {
     compile 'com.android.support:design:25.0.0'
     compile 'com.android.support:cardview-v7:25.0.0'
     compile 'com.android.support:recyclerview-v7:25.0.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta1'
     compile 'com.android.support:support-v4:25.0.0'
     compile 'com.android.support:support-vector-drawable:25.0.0'
 }

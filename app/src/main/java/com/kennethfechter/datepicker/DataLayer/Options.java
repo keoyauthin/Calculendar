@@ -2,6 +2,9 @@ package com.kennethfechter.datepicker.DataLayer;
 
 import com.orm.SugarRecord;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by kfechter on 5/31/2016.
  * Options class.
@@ -13,14 +16,16 @@ public class Options extends SugarRecord {
     private boolean excludeSaturdays;
     private boolean excludeCustomDays;
     private int customExclusionDaysCount;
+    private String excludedDays;
 
     public Options(){}
 
-    public Options(boolean excludeSaturdays, boolean excludeSundays, boolean excludeCustomDays, int customExclusionDaysCount){
+    public Options(boolean excludeSaturdays, boolean excludeSundays, boolean excludeCustomDays, List<String> customExclusionDays){
         this.excludeSaturdays = excludeSaturdays;
         this.excludeSundays = excludeSundays;
         this.excludeCustomDays = excludeCustomDays;
-        this.customExclusionDaysCount = customExclusionDaysCount;
+        this.customExclusionDaysCount = customExclusionDays.size();
+        this.excludedDays = android.text.TextUtils.join(";", customExclusionDays);
     }
 
     public String GetExclusionText(){
@@ -62,4 +67,6 @@ public class Options extends SugarRecord {
     public int GetExclusionDaysCount(){
         return customExclusionDaysCount;
     }
+
+    public List<String> GetExcludedDates() { return Arrays.asList(excludedDays.split("\\s*;\\s*"));}
 }
