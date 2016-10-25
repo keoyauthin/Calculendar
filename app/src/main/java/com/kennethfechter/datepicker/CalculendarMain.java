@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -175,6 +176,8 @@ public class CalculendarMain extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
 
+        Bundle extras = getIntent().getExtras();
+
         setTitle("Current Calculations");
 
         floatingActionButtonGrow = AnimationUtils.loadAnimation(this, R.anim.animation_fab_grow);
@@ -196,7 +199,27 @@ public class CalculendarMain extends AppCompatActivity
         fab.setVisibility(View.VISIBLE);
         fab.startAnimation(floatingActionButtonGrow);
 
-        DatabaseService.ArchiveAndScrub(prefService);
+        if (extras != null)
+        {
+            String targetAction = extras.getString("targetAction");
+            if (targetAction != null)
+            {
+                if (targetAction.equals("create"))
+                {
+                    CreateCalculation();
+                }
+                else if (targetAction.equals("viewArchive"))
+                {
+                    currentArchiveState = true;
+                    UpdateListView(true);
+                    fab.startAnimation(floatingActionButtonShrink);
+                    fab.setVisibility(View.INVISIBLE);
+                    setTitle("Archived Calculations");
+                    navigationView.getMenu().getItem(1).setChecked(true);
+                }
+            }
+        }
+
     }
 
     private void UpdateTextFromPreferences() {
@@ -351,6 +374,40 @@ public class CalculendarMain extends AppCompatActivity
         final CheckBox chkSundays = (CheckBox) dialogLayout.findViewById(R.id.chkSundays);
         final Button buttonAddCustomDate = (Button) dialogLayout.findViewById(R.id.btnAddCustomDay);
         final ListView customDatesListView = (ListView) dialogLayout.findViewById(R.id.customDatesList);
+
+        customDatesListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+               final TextView selectedDate = (TextView)view;
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(CalculendarMain.this);
+                builder1.setMessage("Delete " + selectedDate.getText());
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                String removedDate = (String)selectedDate.getText();
+                                customDates.remove(removedDate);
+                                customDatesListView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, customDates));
+                                dialog.cancel();
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+                return true;
+            }
+        });
+
         buttonAddCustomDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
