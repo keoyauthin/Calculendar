@@ -8,7 +8,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 35
-        versionName "3.0 UI Beta 3"
+        versionName "3.0 UI Beta 2"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -22,8 +22,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.google.firebase:firebase-core:9.0.2'
-    compile 'com.google.firebase:firebase-crash:9.0.2'
     compile 'com.github.satyan:sugar:1.5'
     compile 'com.wdullaer:materialdatetimepicker:2.3.0'
     compile 'com.android.support:design:25.0.0'
@@ -33,8 +31,6 @@ dependencies {
     compile 'com.android.support:support-v4:25.0.0'
     compile 'com.android.support:support-vector-drawable:25.0.0'
 }
-
-apply plugin: 'com.google.gms.google-services'
 
 
 

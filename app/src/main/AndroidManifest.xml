@@ -47,5 +47,4 @@
                 android:value="com.kennethfechter.datepicker.CalculendarMain" />
         </activity>
     </application>
-
 </manifest>

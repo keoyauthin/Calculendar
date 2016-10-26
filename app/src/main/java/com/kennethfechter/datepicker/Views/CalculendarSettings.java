@@ -16,13 +16,9 @@ import android.preference.PreferenceActivity;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.kennethfechter.datepicker.R;
 
 import java.util.List;
