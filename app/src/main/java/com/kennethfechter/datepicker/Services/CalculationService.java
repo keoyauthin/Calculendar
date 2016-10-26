@@ -48,6 +48,43 @@ public class CalculationService {
         return calculatedInterval;
     }
 
+    public static void UpdateCalculation(Calculation updatedCalculation, Options updatedOptions)
+    {
+        updatedCalculation.UpdateOptions(updatedOptions.save());
+        long saturdays = 0;
+        long sundays = 0;
+        long daysBetween = 0;
+        Calendar endCalendar = Calendar.getInstance();
+        endCalendar.setTime(stringDateConverter(updatedCalculation.GetEndDate()));
+        Calendar internalDate =  Calendar.getInstance();
+        internalDate.setTime(stringDateConverter(updatedCalculation.GetStartDate()));
+        internalDate = (Calendar)internalDate.clone();
+        while(internalDate.before(endCalendar.clone())){
+            if(internalDate.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY){
+                saturdays++;
+            }
+            if(internalDate.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
+                sundays++;
+            }
+            internalDate.add(Calendar.DAY_OF_MONTH, 1);
+            daysBetween++;
+        }
+
+        if(updatedOptions.GetExcludeSaturdays()){
+            daysBetween -=  saturdays;
+        }
+
+        if(updatedOptions.GetExcludeSundays()){
+            daysBetween -= sundays;
+        }
+
+        if(updatedOptions.GetExcludeCustomDays()){
+            daysBetween -= updatedOptions.GetExclusionDaysCount();
+        }
+
+        updatedCalculation.UpdateCalculatedInterval(""+daysBetween);
+    }
+
     public static boolean isEndDateAfterStartDate(Calendar startDate, Calendar endDate)
     {
         Calendar internalDate = (Calendar) startDate.clone();

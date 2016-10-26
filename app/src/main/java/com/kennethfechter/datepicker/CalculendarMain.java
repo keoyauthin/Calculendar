@@ -493,67 +493,8 @@ public class CalculendarMain extends AppCompatActivity
             myToggleSelection(idx);
             return;
         }
-
-        Calculation selectedCalculation = cla.getCalculationAtPosition(idx);
-        if(!selectedCalculation.itemArchived)
-        {
-            showInfoDialog(selectedCalculation);
-        }
     }
 
-    private void showInfoDialog(Calculation selectedCalculation)
-    {
-        // do things with the view, get data, learn about its life
-        View dialogLayoutView = getLayoutInflater().inflate(R.layout.item_info_dialog, null);
-
-        // Get the selected calculations options
-        Options selectedOptions = selectedCalculation.GetOptions();
-
-        // Set up the dialogs layout view before we use it.
-        ListView customDatesList = (ListView) dialogLayoutView.findViewById(R.id.customDatesList);
-        CheckBox chkSundays = (CheckBox)dialogLayoutView.findViewById(R.id.chkSundays);
-        CheckBox chkSaturdays = (CheckBox)dialogLayoutView.findViewById(R.id.chkSaturdays);
-        CheckBox chkCustomDays = (CheckBox)dialogLayoutView.findViewById(R.id.chkCustomDays);
-        Button btnCustomDays = (Button)dialogLayoutView.findViewById(R.id.btnAddCustomDay);
-
-        TextView startDate = (TextView)dialogLayoutView.findViewById(R.id.txtStartDate);
-        TextView endDate = (TextView)dialogLayoutView.findViewById(R.id.txtEndDate);
-
-        startDate.setText(String.format("Start Date: %s", selectedCalculation.GetStartDate()));
-        endDate.setText(String.format("End Date: %s", selectedCalculation.GetEndDate()));
-
-        chkSundays.setChecked(selectedOptions.GetExcludeSundays());
-        chkSundays.setEnabled(!selectedCalculation.itemArchived);
-
-        chkSaturdays.setChecked(selectedOptions.GetExcludeSaturdays());
-        chkSaturdays.setEnabled(!selectedCalculation.itemArchived);
-
-        chkCustomDays.setChecked(selectedOptions.GetExcludeCustomDays());
-        chkCustomDays.setEnabled(!selectedCalculation.itemArchived);
-
-        boolean customDatesButtonVisible = selectedOptions.GetExcludeCustomDays() && !selectedCalculation.itemArchived;
-
-        if(customDatesButtonVisible)
-        {
-            btnCustomDays.setVisibility(View.VISIBLE);
-        }
-
-        if(selectedOptions.GetExcludeCustomDays())
-        {
-            customDatesList.setVisibility(View.VISIBLE);
-        }
-
-        new AlertDialog.Builder(CalculendarMain.this)
-                .setView(dialogLayoutView)
-                .setTitle("Calculation Info")
-                .setNegativeButton("Close", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                }).show();
-
-    }
 
     private class RecyclerViewOnGestureListener extends SimpleOnGestureListener {
         @Override

@@ -66,4 +66,16 @@ public class Calculation extends SugarRecord {
         this.archivedOn = "";
         this.save();
     }
+
+    public void UpdateOptions(long updatedOptionsId)
+    {
+        this.options = updatedOptionsId;
+        this.save();
+    }
+
+    public void UpdateCalculatedInterval(String updatedInterval)
+    {
+        this.calculatedInterval = updatedInterval;
+        this.save();
+    }
 }

@@ -2,6 +2,7 @@ package com.kennethfechter.datepicker.DataLayer;
 
 import com.orm.SugarRecord;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -68,5 +69,5 @@ public class Options extends SugarRecord {
         return customExclusionDaysCount;
     }
 
-    public List<String> GetExcludedDates() { return Arrays.asList(excludedDays.split("\\s*;\\s*"));}
+    public List<String> GetExcludedDates() { return excludedDays != null ? Arrays.asList(excludedDays.split("\\s*;\\s*")) : new ArrayList<String>();}
 }
