@@ -90,6 +90,7 @@ public class CalculationsFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
+        @SuppressWarnings("EmptyMethod")
         void onFragmentInteraction(Uri uri);
     }
 }

@@ -15,18 +15,23 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.kennethfechter.datepicker.fragments.CalculationsFragment;
+import com.kennethfechter.datepicker.utilities.ApplicationUtilities;
 
 public class CalculendarMain extends AppCompatActivity implements CalculationsFragment.OnFragmentInteractionListener {
+
+    private ApplicationUtilities appUtilities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculendar_main);
 
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
+        appUtilities = new ApplicationUtilities(CalculendarMain.this);
         ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -52,8 +57,7 @@ public class CalculendarMain extends AppCompatActivity implements CalculationsFr
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+               appUtilities.CreateCalculation();
             }
         });
 
