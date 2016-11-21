@@ -27,32 +27,32 @@ public class DatabaseUtilities {
     }
 
     public static void ArchiveAndScrub(ApplicationUtilities prefService) {
-        if (prefService.getBooleanPreference("auto_archive_items", false)) {
+        if (prefService.getBooleanPreference()) {
             Archive(prefService);
             ScrubArchives(prefService);
         }
 
     }
 
-    public static void Archive(ApplicationUtilities prefService){
+    private static void Archive(ApplicationUtilities prefService){
         List<Calculation> items = getCalculations(false);
         Calendar startDate = Calendar.getInstance();
         for (Calculation calc:items) {
             Calendar endDate = Calendar.getInstance();
             endDate.setTime(calc.GetCreatedDate());
-            if(CalculationUtilities.GetArchiverInterval(startDate,endDate) > prefService.GetLongPreference("archive_period", 30)){
+            if(CalculationUtilities.GetArchiverInterval(startDate,endDate) > prefService.GetLongPreference("archive_period")){
                 calc.ArchiveCalculation();
             }
         }
     }
 
-    public static void ScrubArchives(ApplicationUtilities prefService){
+    private static void ScrubArchives(ApplicationUtilities prefService){
         List<Calculation> items = getCalculations(false);
         Calendar startDate = Calendar.getInstance();
         for (Calculation calc:items) {
             Calendar endDate = Calendar.getInstance();
             endDate.setTime(calc.GetArchivedDate());
-            if(CalculationUtilities.GetArchiverInterval(startDate,endDate) > prefService.GetLongPreference("archive_retention_period",30)){
+            if(CalculationUtilities.GetArchiverInterval(startDate,endDate) > prefService.GetLongPreference("archive_retention_period")){
                 calc.DeleteCalculation();
             }
         }

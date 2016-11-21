@@ -11,7 +11,7 @@ public class Calculation extends SugarRecord {
     private String endDate;
     private String calculatedInterval;
     private Long options;
-    public boolean itemArchived;
+    private boolean itemArchived;
     private String archivedOn;
     private String createdOn;
 

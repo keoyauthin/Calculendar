@@ -22,7 +22,6 @@ import java.util.List;
 public class CalculationListAdapter extends RecyclerView.Adapter<CalculationListAdapter.ItemViewHolder>{
 
     private final List<Calculation> calculatedIntervals;
-    private final Context mContext;
     private  ItemChangedInterface itemChangeListener;
     private final SparseBooleanArray selectedCalculations;
 
@@ -42,18 +41,18 @@ public class CalculationListAdapter extends RecyclerView.Adapter<CalculationList
     }
 
     public interface ItemChangedInterface {
+        @SuppressWarnings("EmptyMethod")
         void ItemChanged();
     }
 
     public ItemChangedInterface ItemChangeListener;
 
-    public CalculationListAdapter(List<Calculation> calculatedIntervals, Context appContext, ItemChangedInterface itemChangeListener, boolean calculationsArchived, boolean actionMode) {
+    public CalculationListAdapter(List<Calculation> calculatedIntervals, Context appContext, ItemChangedInterface itemChangeListener) {
         this.calculatedIntervals = calculatedIntervals;
-        this.mContext = appContext;
         this.itemChangeListener = itemChangeListener;
         this.selectedCalculations = new SparseBooleanArray();
-        this.performAnimations = calculationsArchived;
-        this.actionMode = actionMode;
+        this.performAnimations = false;
+        this.actionMode = false;
         this.itemChangeListener = itemChangeListener;
     }
 
@@ -90,10 +89,10 @@ public class CalculationListAdapter extends RecyclerView.Adapter<CalculationList
     }
 
     static class ItemViewHolder extends RecyclerView.ViewHolder {
-        protected final TextView itemId;
-        protected final TextView intervalText;
-        protected final TextView exclusionsText;
-        protected final TextView itemTitleText;
+        final TextView itemId;
+        final TextView intervalText;
+        final TextView exclusionsText;
+        final TextView itemTitleText;
 
         public ItemViewHolder(View v){
             super(v);

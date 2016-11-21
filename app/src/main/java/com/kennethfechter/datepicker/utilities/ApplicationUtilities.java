@@ -1,5 +1,6 @@
 package com.kennethfechter.datepicker.utilities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,25 +29,25 @@ import java.util.List;
 public class ApplicationUtilities {
 
     private final Context mContext;
-    final SharedPreferences appPreferences;
-    private Calendar startDate = Calendar.getInstance();
-    private Calendar endDate = Calendar.getInstance();
+    private final SharedPreferences appPreferences;
+    private final Calendar startDate = Calendar.getInstance();
+    private final Calendar endDate = Calendar.getInstance();
 
     public ApplicationUtilities(Context context){
         this.mContext = context;
         appPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public long GetLongPreference(String key, long defaultValue){
-        return appPreferences.getLong(key, defaultValue);
+    public long GetLongPreference(String key){
+        return appPreferences.getLong(key, (long) 30);
     }
 
     public String getStringPreference(String key, String defaultValue){
         return appPreferences.getString(key, defaultValue);
     }
 
-    public boolean getBooleanPreference(String key, boolean defaultValue){
-        return appPreferences.getBoolean(key,defaultValue);
+    public boolean getBooleanPreference(){
+        return appPreferences.getBoolean("auto_archive_items", false);
     }
 
     public void CreateCalculation(){
@@ -93,9 +94,9 @@ public class ApplicationUtilities {
 
     private void ShowOptionsDialog(){
         final boolean areDatesValid = CalculationUtilities.IsEndDateValid(startDate, endDate);
-        final List<String> customDates = new ArrayList<String>();
+        final List<String> customDates = new ArrayList<>();
         LayoutInflater inflater = ((Activity)mContext).getLayoutInflater();
-        View dialogLayout = inflater.inflate(R.layout.options_dialog_layout, null);
+        @SuppressLint("InflateParams") View dialogLayout = inflater.inflate(R.layout.options_dialog_layout, null);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
         dialogBuilder.setView(dialogLayout);
         final CheckBox chkCustomDates = (CheckBox) dialogLayout.findViewById(R.id.chkCustomDays);
@@ -118,7 +119,7 @@ public class ApplicationUtilities {
                             public void onClick(DialogInterface dialog, int id) {
                                 String removedDate = (String)selectedDate.getText();
                                 customDates.remove(removedDate);
-                                customDatesListView.setAdapter(new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, android.R.id.text1, customDates));
+                                customDatesListView.setAdapter(new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1, android.R.id.text1, customDates));
                                 dialog.cancel();
                             }
                         });
@@ -153,7 +154,7 @@ public class ApplicationUtilities {
                                     {
                                         customDates.add(selectedDay);
                                         Toast.makeText(mContext, "Custom Date: " + selectedDay + " Added" , Toast.LENGTH_LONG).show();
-                                        customDatesListView.setAdapter(new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, android.R.id.text1, customDates));
+                                        customDatesListView.setAdapter(new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1, android.R.id.text1, customDates));
                                     } else {
                                         Toast.makeText(mContext, "Custom Date is already in exclusion list" , Toast.LENGTH_LONG).show();
 
@@ -200,10 +201,8 @@ public class ApplicationUtilities {
             dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    if(areDatesValid){
-                        Options options =  new Options(chkSaturdays.isChecked(),chkSundays.isChecked(),chkCustomDates.isChecked(),customDates);
-                       CalculationUtilities.CalculateInterval(startDate,endDate,options).save();
-                    }
+                    Options options =  new Options(chkSaturdays.isChecked(),chkSundays.isChecked(),chkCustomDates.isChecked(),customDates);
+                    CalculationUtilities.CalculateInterval(startDate,endDate,options).save();
                 }
             });
             dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
