@@ -41,11 +41,7 @@ public class ApplicationUtilities {
     public long GetLongPreference(String key){
         return appPreferences.getLong(key, (long) 30);
     }
-
-    public String getStringPreference(String key, String defaultValue){
-        return appPreferences.getString(key, defaultValue);
-    }
-
+    
     public boolean getBooleanPreference(){
         return appPreferences.getBoolean("auto_archive_items", false);
     }
