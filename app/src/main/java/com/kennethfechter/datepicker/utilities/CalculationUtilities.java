@@ -1,7 +1,6 @@
 package com.kennethfechter.datepicker.utilities;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 
 import com.kennethfechter.datepicker.entities.Calculation;
 import com.kennethfechter.datepicker.entities.Options;
@@ -41,42 +40,6 @@ public class CalculationUtilities {
         }
 
         return new Calculation(ConvertDateToString(startDate), ConvertDateToString(endDate), ""+daysBetween,options.save());
-    }
-
-    public static void UpdateCalculation(Calculation calculationToUpdate, Options updatedOptions){
-        calculationToUpdate.UpdateOptions(updatedOptions.save());
-        long saturdays = 0;
-        long sundays = 0;
-        long daysBetween = 0;
-        Calendar endCalendar = Calendar.getInstance();
-        endCalendar.setTime(ConvertStringToDate(calculationToUpdate.GetEndDate()));
-        Calendar internalDate =  Calendar.getInstance();
-        internalDate.setTime(ConvertStringToDate(calculationToUpdate.GetStartDate()));
-        internalDate = (Calendar)internalDate.clone();
-        while(internalDate.before(endCalendar.clone())){
-            if(internalDate.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY){
-                saturdays++;
-            }
-            if(internalDate.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
-                sundays++;
-            }
-            internalDate.add(Calendar.DAY_OF_MONTH, 1);
-            daysBetween++;
-        }
-
-        if(updatedOptions.GetExcludeSaturdays()){
-            daysBetween -=  saturdays;
-        }
-
-        if(updatedOptions.GetExcludeSundays()){
-            daysBetween -= sundays;
-        }
-
-        if(updatedOptions.GetExcludeCustomDays()){
-            daysBetween -= updatedOptions.GetExclusionDaysCount();
-        }
-
-        calculationToUpdate.UpdateCalculatedInterval(""+daysBetween);
     }
 
     public static boolean IsEndDateValid(Calendar startDate, Calendar endDate){

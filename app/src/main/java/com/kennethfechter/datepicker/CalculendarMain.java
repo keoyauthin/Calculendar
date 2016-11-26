@@ -1,58 +1,35 @@
 package com.kennethfechter.datepicker;
 
-import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.kennethfechter.datepicker.fragments.CalculationsFragment;
+import com.kennethfechter.datepicker.adapters.CalculationListAdapter;
 import com.kennethfechter.datepicker.utilities.ApplicationUtilities;
+import com.kennethfechter.datepicker.utilities.DatabaseUtilities;
 
-public class CalculendarMain extends AppCompatActivity implements CalculationsFragment.OnFragmentInteractionListener {
+public class CalculendarMain extends AppCompatActivity {
 
     private ApplicationUtilities appUtilities;
+    private RecyclerView calculationsList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculendar_main);
-
-
-
+        calculationsList = (RecyclerView) findViewById(R.id.calculationsList);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        calculationsList.setLayoutManager(llm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         appUtilities = new ApplicationUtilities(CalculendarMain.this);
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                // TODO: Destroy the action mode
-                setTitle(mSectionsPagerAdapter.getPageTitle(position));
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,11 +38,8 @@ public class CalculendarMain extends AppCompatActivity implements CalculationsFr
             }
         });
 
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-        
+        UpdateListView();
+        fab.show();
     }
 
     @Override
@@ -88,31 +62,12 @@ public class CalculendarMain extends AppCompatActivity implements CalculationsFr
         return super.onOptionsItemSelected(item);
     }
 
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return CalculationsFragment.newInstance(position + 1);
-        }
-
-        @Override
-        public int getCount() {
-            return 2;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "My Calculations";
-                case 1:
-                    return "Archived Calculations";
+    private void UpdateListView(){
+        calculationsList.setAdapter(DatabaseUtilities.GetCalculations(this, new CalculationListAdapter.ItemChangedInterface() {
+            @Override
+            public void ItemChanged() {
+                UpdateListView();
             }
-            return null;
-        }
+        }));
     }
 }

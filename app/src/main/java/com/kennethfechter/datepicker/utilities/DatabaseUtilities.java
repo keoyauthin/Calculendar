@@ -1,7 +1,9 @@
 package com.kennethfechter.datepicker.utilities;
 
+import android.content.Context;
+
+import com.kennethfechter.datepicker.adapters.CalculationListAdapter;
 import com.kennethfechter.datepicker.entities.Calculation;
-import com.orm.query.Condition;
 import com.orm.query.Select;
 
 import java.util.ArrayList;
@@ -10,11 +12,9 @@ import java.util.List;
 
 public class DatabaseUtilities {
 
-    public static List<Calculation> getCalculations(boolean archivedItems){
-        int archive = (archivedItems) ? 1 : 0;
+    private static List<Calculation> getCalculations(){
         try {
-            return Select.from(Calculation.class)
-                    .where(Condition.prop("ITEM_ARCHIVED").eq(archive)).list();
+            return Select.from(Calculation.class).list();
         }
         catch (Exception ex)
         {
@@ -28,14 +28,13 @@ public class DatabaseUtilities {
 
     public static void ArchiveAndScrub(ApplicationUtilities prefService) {
         if (prefService.getBooleanPreference()) {
-            Archive(prefService);
-            ScrubArchives(prefService);
+            ScrubItems(prefService);
         }
 
     }
 
-    private static void Archive(ApplicationUtilities prefService){
-        List<Calculation> items = getCalculations(false);
+    private static void ScrubItems(ApplicationUtilities prefService){
+        List<Calculation> items = getCalculations();
         Calendar startDate = Calendar.getInstance();
         for (Calculation calc:items) {
             Calendar endDate = Calendar.getInstance();
@@ -46,15 +45,7 @@ public class DatabaseUtilities {
         }
     }
 
-    private static void ScrubArchives(ApplicationUtilities prefService){
-        List<Calculation> items = getCalculations(false);
-        Calendar startDate = Calendar.getInstance();
-        for (Calculation calc:items) {
-            Calendar endDate = Calendar.getInstance();
-            endDate.setTime(calc.GetArchivedDate());
-            if(CalculationUtilities.GetArchiverInterval(startDate,endDate) > prefService.GetLongPreference("archive_retention_period")){
-                calc.DeleteCalculation();
-            }
-        }
+    public static CalculationListAdapter GetCalculations(Context context, CalculationListAdapter.ItemChangedInterface itemChangedListener){
+       return new CalculationListAdapter(DatabaseUtilities.getCalculations(), context, itemChangedListener);
     }
 }
