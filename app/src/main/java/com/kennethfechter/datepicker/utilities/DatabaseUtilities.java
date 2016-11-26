@@ -27,7 +27,7 @@ public class DatabaseUtilities {
     }
 
     public static void ArchiveAndScrub(ApplicationUtilities prefService) {
-        if (prefService.getBooleanPreference()) {
+        if (prefService.getAppArchiveSetting()) {
             ScrubItems(prefService);
         }
 
@@ -39,8 +39,8 @@ public class DatabaseUtilities {
         for (Calculation calc:items) {
             Calendar endDate = Calendar.getInstance();
             endDate.setTime(calc.GetCreatedDate());
-            if(CalculationUtilities.GetArchiverInterval(startDate,endDate) > prefService.GetLongPreference("archive_period")){
-                calc.ArchiveCalculation();
+            if(CalculationUtilities.GetArchiverInterval(startDate,endDate) > prefService.getRetentionPeriod()){
+                calc.DeleteCalculation();
             }
         }
     }

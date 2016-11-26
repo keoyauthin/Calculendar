@@ -38,6 +38,7 @@ public class CalculendarMain extends AppCompatActivity {
             }
         });
 
+        DatabaseUtilities.ArchiveAndScrub(appUtilities);
         UpdateListView();
         fab.show();
     }

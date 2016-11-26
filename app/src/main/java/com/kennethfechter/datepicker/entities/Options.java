@@ -63,5 +63,6 @@ public class Options extends SugarRecord {
         return customExclusionDaysCount;
     }
 
+    @SuppressWarnings("unused") // this will be used once I implement ability to view info and update the calculations :D
     public List<String> GetExcludedDates() { return excludedDays != null ? Arrays.asList(excludedDays.split("\\s*;\\s*")) : new ArrayList<String>();}
 }

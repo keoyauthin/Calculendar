@@ -38,11 +38,11 @@ public class ApplicationUtilities {
         appPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public long GetLongPreference(String key){
-        return appPreferences.getLong(key, (long) 30);
+    public long getRetentionPeriod(){
+        return appPreferences.getLong("retention_period", (long) 30);
     }
 
-    public boolean getBooleanPreference(){
+    public boolean getAppArchiveSetting(){
         return appPreferences.getBoolean("auto_archive_items", false);
     }
 
