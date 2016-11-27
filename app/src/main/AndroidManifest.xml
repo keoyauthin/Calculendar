@@ -4,14 +4,14 @@
     package="com.kennethfechter.datepicker">
 
     <application
+        android:name="com.orm.SugarApp"
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name="com.orm.SugarApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:fullBackupContent="@xml/backup_descriptor"
         tools:ignore="GoogleAppIndexingWarning">
         <meta-data
             android:name="DATABASE"
@@ -25,15 +25,28 @@
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="com.kennethfechter" />
+
         <activity
             android:name=".CalculendarMain"
             android:label="@string/title_activity_calculendar_main"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts"/>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+        <activity
+            android:name=".activities.CalculendarSettings"
+            android:label="@string/title_activity_calculendar_settings"
+            android:parentActivityName=".CalculendarMain">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kennethfechter.datepicker.CalculendarMain" />
         </activity>
     </application>
 

@@ -9,6 +9,7 @@ android {
         targetSdkVersion 25
         versionCode 36
         versionName "3.0"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
