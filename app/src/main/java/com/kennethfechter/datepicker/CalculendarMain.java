@@ -58,6 +58,7 @@ public class CalculendarMain extends AppCompatActivity implements RecyclerView.O
         floatingActionButton.show();
         calculationsList.addOnItemTouchListener(this);
         gestureDetector = new GestureDetectorCompat(this, new RecyclerViewOnGestureListener());
+        setTitle("My Calculations");
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             String targetAction = extras.getString("targetAction");
@@ -123,7 +124,7 @@ public class CalculendarMain extends AppCompatActivity implements RecyclerView.O
     }
 
     private void UpdateListView(){
-        calculationsListAdapter =  DatabaseUtilities.GetCalculations(this, new CalculationListAdapter.ItemChangedInterface() {
+        calculationsListAdapter =  DatabaseUtilities.GetCalculations(new CalculationListAdapter.ItemChangedInterface() {
             @Override
             public void ItemChanged() {
                 UpdateListView();
@@ -131,7 +132,7 @@ public class CalculendarMain extends AppCompatActivity implements RecyclerView.O
         calculationsList.setAdapter(calculationsListAdapter);
     }
 
-    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+    private final ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
         // Called when the action mode is created; startActionMode() was called
         @Override

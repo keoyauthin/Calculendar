@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="bkg_card">#8C9EFF</color>
-    <color name="color_action_mode_bg">#3F51B5</color>
+    <color name="colorPrimary">#CF0000</color>
+    <color name="colorPrimaryDark">#890000</color>
+    <color name="colorAccent">#CF00CE</color>
+    <color name="bkg_card">#0D8FF7</color>
 </resources>

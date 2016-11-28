@@ -1,7 +1,5 @@
 package com.kennethfechter.datepicker.utilities;
 
-import android.content.Context;
-
 import com.kennethfechter.datepicker.adapters.CalculationListAdapter;
 import com.kennethfechter.datepicker.entities.Calculation;
 import com.orm.query.Select;
@@ -45,7 +43,7 @@ public class DatabaseUtilities {
         }
     }
 
-    public static CalculationListAdapter GetCalculations(Context context, CalculationListAdapter.ItemChangedInterface itemChangedListener){
-       return new CalculationListAdapter(DatabaseUtilities.getCalculations(), context, itemChangedListener);
+    public static CalculationListAdapter GetCalculations(CalculationListAdapter.ItemChangedInterface itemChangedListener){
+       return new CalculationListAdapter(DatabaseUtilities.getCalculations(), itemChangedListener);
     }
 }

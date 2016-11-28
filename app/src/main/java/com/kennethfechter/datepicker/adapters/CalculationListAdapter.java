@@ -1,7 +1,6 @@
 package com.kennethfechter.datepicker.adapters;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
@@ -27,14 +26,17 @@ public class CalculationListAdapter extends RecyclerView.Adapter<CalculationList
     private final boolean performAnimations;
     private boolean actionMode;
 
+    @SuppressWarnings("unused")
     public boolean PerformAnimations(){
         return performAnimations;
     }
 
+    @SuppressWarnings("unused")
     public boolean IsActionMode() {
         return actionMode;
     }
 
+    @SuppressWarnings("unused")
     public void SetActionMode(boolean actionMode){
         this.actionMode = actionMode;
     }
@@ -44,9 +46,10 @@ public class CalculationListAdapter extends RecyclerView.Adapter<CalculationList
         void ItemChanged();
     }
 
+    @SuppressWarnings("unused")
     public ItemChangedInterface ItemChangeListener;
 
-    public CalculationListAdapter(List<Calculation> calculatedIntervals, Context appContext, ItemChangedInterface itemChangeListener) {
+    public CalculationListAdapter(List<Calculation> calculatedIntervals, ItemChangedInterface itemChangeListener) {
         this.calculatedIntervals = calculatedIntervals;
         this.itemChangeListener = itemChangeListener;
         this.selectedCalculations = new SparseBooleanArray();
@@ -70,7 +73,7 @@ public class CalculationListAdapter extends RecyclerView.Adapter<CalculationList
         calculationViewHolder.itemId.setText(calculatedInterval.getId().toString());
         calculationViewHolder.intervalText.setText(intervalText);
         calculationViewHolder.itemTitleText.setText(calculatedInterval.GetStartDate() + " - " + calculatedInterval.GetEndDate());
-        calculationViewHolder.itemView.findViewById(R.id.card_view).setBackgroundColor(selectedCalculations.valueAt(position) ? Color.LTGRAY : Color.WHITE);
+        calculationViewHolder.itemView.findViewById(R.id.card_view).setBackgroundColor(selectedCalculations.get(position, false) ? Color.LTGRAY : Color.WHITE);
     }
 
     @Override
@@ -132,6 +135,7 @@ public class CalculationListAdapter extends RecyclerView.Adapter<CalculationList
         return items;
     }
 
+    @SuppressWarnings("unused")
     public List<Long> getItemIdsFromPosition(){
         List<Long> itemIds = new ArrayList<>(selectedCalculations.size());
         for (int i = 0; i < selectedCalculations.size(); i++){
@@ -140,6 +144,7 @@ public class CalculationListAdapter extends RecyclerView.Adapter<CalculationList
         return itemIds;
     }
 
+    @SuppressWarnings("unused")
     public void AddInternalItem(long itemId, int position){
         this.calculatedIntervals.add(position, DatabaseUtilities.getCalculation(itemId));
         notifyDataSetChanged();

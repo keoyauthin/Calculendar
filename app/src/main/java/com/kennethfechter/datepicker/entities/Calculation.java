@@ -43,6 +43,7 @@ public class Calculation extends SugarRecord {
         this.delete();
     }
 
+    @SuppressWarnings("unused")
     public void UpdateCalculation(long updatedOptionsId, String updatedInterval){
         this.options = updatedOptionsId;
         this.calculatedInterval = updatedInterval;
