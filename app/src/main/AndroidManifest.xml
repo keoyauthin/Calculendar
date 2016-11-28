@@ -48,6 +48,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kennethfechter.datepicker.CalculendarMain" />
         </activity>
+        <activity android:name=".activities.CalculendarInfo"
+            android:parentActivityName=".CalculendarMain"
+            android:label="@string/title_activity_calculendar_info">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kennethfechter.datepicker.CalculendarMain" />
+        </activity>
     </application>
 
 </manifest>

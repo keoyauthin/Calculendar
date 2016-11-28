@@ -39,11 +39,11 @@ public class ApplicationUtilities {
     }
 
     public long getRetentionPeriod(){
-        return appPreferences.getLong("retention_period", (long) 30);
+        return Long.parseLong(appPreferences.getString("retention_period", "30"));
     }
 
     public boolean getAppArchiveSetting(){
-        return appPreferences.getBoolean("auto_archive_items", false);
+        return appPreferences.getBoolean("auto_delete_items", false);
     }
 
     public void CreateCalculation(){

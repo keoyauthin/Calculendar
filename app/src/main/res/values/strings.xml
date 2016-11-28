@@ -24,39 +24,48 @@
     <string name="validation_error_start_date_must_occur_before_end_date">Validation Error: start date must occur before end date</string>
     <string name="delete">Delete</string>
     <string name="title_activity_calculendar_settings">Settings</string>
+    <string name="title_activity_calculendar_info">About</string>
 
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
 
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
-        based on your message history
+    <string name="pref_title_social_recommendations">Enable Automatic Database Cleanup</string>
+    <string name="pref_description_automatic_delete">Automatically delete old entries to save disk space.
     </string>
 
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
 
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
+    <string name="pref_title_retention_period">Retention Period</string>
+    <string-array name="pref_sync_retention_titles">
+        <item>15 Days</item>
+        <item>30 Days</item>
+        <item>60 Days</item>
+        <item>90 Days</item>
+        <item>120 Days</item>
+        <item>150 Days</item>
     </string-array>
-    <string-array name="pref_sync_frequency_values">
+    <string-array name="pref_sync_retention_values">
         <item>15</item>
         <item>30</item>
         <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>-1</item>
+        <item>90</item>
+        <item>120</item>
+        <item>150</item>
+    </string-array>
+
+    <string-array name="developer_names">
+        <item>Kenneth Fechter</item>
+        <item>Graham Klein</item>
+        <item>Tobyn Collinsworth</item>
     </string-array>
 
     <!-- Example settings for Notifications -->
 
-    <string name="pref_ringtone_silent">Silent</string>
+    <string name="fallback_version_name">3.0 RC 1</string>
+    <string name="calculendar_info_title">Calculendar %1$s</string>
 
+    <string name="credit_text">This application would not be possible without the help of the following developers:</string>
+    <string name="license_text">Uses material icons from https://material.io/icons/ under Apache 2.0 License</string>
 </resources>

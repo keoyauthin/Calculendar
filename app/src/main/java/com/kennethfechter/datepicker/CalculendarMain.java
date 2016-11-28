@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.GestureDetector.SimpleOnGestureListener;
 
+import com.kennethfechter.datepicker.activities.CalculendarInfo;
 import com.kennethfechter.datepicker.activities.CalculendarSettings;
 import com.kennethfechter.datepicker.adapters.CalculationListAdapter;
 import com.kennethfechter.datepicker.utilities.ApplicationUtilities;
@@ -101,8 +102,8 @@ public class CalculendarMain extends AppCompatActivity implements RecyclerView.O
             startActivity(intent);
             return true;
         } else if (id == R.id.action_about) {
-            //Intent intent = new Intent(this, CalculendarAbout.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, CalculendarInfo.class);
+            startActivity(intent);
             return true;
         }
 

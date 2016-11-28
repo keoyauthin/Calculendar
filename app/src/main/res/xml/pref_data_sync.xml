@@ -1,19 +1,19 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreference
-        android:defaultValue="true"
-        android:key="example_switch"
-        android:summary="@string/pref_description_social_recommendations"
+        android:defaultValue="false"
+        android:key="auto_delete_items"
+        android:summary="@string/pref_description_automatic_delete"
         android:title="@string/pref_title_social_recommendations" />
 
     <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
     <ListPreference
         android:defaultValue="180"
-        android:entries="@array/pref_sync_frequency_titles"
-        android:entryValues="@array/pref_sync_frequency_values"
-        android:key="sync_frequency"
+        android:entries="@array/pref_sync_retention_titles"
+        android:entryValues="@array/pref_sync_retention_values"
+        android:key="retention_period"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
-        android:title="@string/pref_title_sync_frequency" />
+        android:title="@string/pref_title_retention_period" />
 
 </PreferenceScreen>
