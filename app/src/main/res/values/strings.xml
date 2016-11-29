@@ -63,7 +63,7 @@
 
     <!-- Example settings for Notifications -->
 
-    <string name="fallback_version_name">3.0 RC 1</string>
+    <string name="fallback_version_name">3.0 RC 2</string>
     <string name="calculendar_info_title">Calculendar %1$s</string>
 
     <string name="credit_text">This application would not be possible without the help of the following developers:</string>
