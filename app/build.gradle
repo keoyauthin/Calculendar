@@ -7,14 +7,14 @@ android {
         applicationId "com.kennethfechter.datepicker"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 37
+        versionCode 38
         versionName "3.0 RC 1"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
