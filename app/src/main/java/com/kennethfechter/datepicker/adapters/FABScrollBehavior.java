@@ -1,4 +1,4 @@
-package com.kennethfechter.datepicker.DataLayer;
+package com.kennethfechter.datepicker.adapters;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
