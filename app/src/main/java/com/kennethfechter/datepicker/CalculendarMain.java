@@ -26,7 +26,7 @@ import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
 
-public class CalculendarMain extends AppCompatActivity implements RecyclerView.OnItemTouchListener {
+public class CalculendarMain extends AppCompatActivity implements RecyclerView.OnItemTouchListener, ApplicationUtilities.ItemSavedInterface {
 
     private ApplicationUtilities appUtilities;
     private RecyclerView calculationsList;
@@ -45,12 +45,12 @@ public class CalculendarMain extends AppCompatActivity implements RecyclerView.O
         calculationsList.setLayoutManager(llm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        appUtilities = new ApplicationUtilities(CalculendarMain.this);
+        appUtilities = new ApplicationUtilities(CalculendarMain.this, CalculendarMain.this);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               appUtilities.CreateCalculation();
+                appUtilities.CreateCalculation();
             }
         });
 
@@ -69,6 +69,11 @@ public class CalculendarMain extends AppCompatActivity implements RecyclerView.O
                 }
             }
         }
+    }
+
+    @Override
+    public void ItemSaved(){
+        UpdateListView();
     }
 
     @Override

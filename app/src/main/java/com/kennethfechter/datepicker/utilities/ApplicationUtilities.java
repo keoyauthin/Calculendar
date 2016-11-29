@@ -33,9 +33,21 @@ public class ApplicationUtilities {
     private final Calendar startDate = Calendar.getInstance();
     private final Calendar endDate = Calendar.getInstance();
 
+    private ItemSavedInterface ItemSaveListener;
+
+    public interface ItemSavedInterface {
+        void ItemSaved();
+    }
+
     public ApplicationUtilities(Context context){
         this.mContext = context;
         appPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    public ApplicationUtilities(Context context, ItemSavedInterface itemSaveListener){
+        this.mContext = context;
+        appPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.ItemSaveListener = itemSaveListener;
     }
 
     public long getRetentionPeriod(){
@@ -199,6 +211,7 @@ public class ApplicationUtilities {
                 public void onClick(DialogInterface dialog, int which) {
                     Options options =  new Options(chkSaturdays.isChecked(),chkSundays.isChecked(),chkCustomDates.isChecked(),customDates);
                     CalculationUtilities.CalculateInterval(startDate,endDate,options).save();
+                    ItemSaveListener.ItemSaved();
                 }
             });
             dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

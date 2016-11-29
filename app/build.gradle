@@ -7,7 +7,7 @@ android {
         applicationId "com.kennethfechter.datepicker"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 38
+        versionCode 39
         versionName "3.0 RC 1"
         vectorDrawables.useSupportLibrary = true
     }
