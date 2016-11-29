@@ -39,6 +39,7 @@ public class ApplicationUtilities {
         void ItemSaved();
     }
 
+    @SuppressWarnings("unused")
     public ApplicationUtilities(Context context){
         this.mContext = context;
         appPreferences = PreferenceManager.getDefaultSharedPreferences(context);
